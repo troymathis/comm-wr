@@ -12,9 +12,7 @@
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
           width="100"
         />
-        {% endfor %} {% for interest in user.person.interests.all %}
-        {% for int in person.interests.all %}
-        {% if interest.name == int.name %}
+        {% endfor %}
         <span class="card-title">{{person.name}}</span>
       </div>
     </div>
@@ -87,7 +85,4 @@
     </div>
   </div>
 </div>
-{% endif %}
-{% endfor %}
-{% endfor %}
 {% endblock %}
