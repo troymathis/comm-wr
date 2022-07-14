@@ -13,7 +13,8 @@
 
 ---
 ## Screenshots
-![home](https://user-images.githubusercontent.com/104251298/171857200-a5836e1b-06b9-4d9c-9250-94b96f69488b.png)
+![Screen Shot 2022-07-14 at 8 10 35 AM](https://user-images.githubusercontent.com/104251298/178990802-c8fcdb7c-7f76-40ee-a5c3-d1aa4d6bb431.png)
+
 ![Screen Shot 2022-07-14 at 8 11 34 AM](https://user-images.githubusercontent.com/104251298/178990387-9b6cf863-d5fd-434a-b499-7e5e16f12b0a.png)
 
 ---
