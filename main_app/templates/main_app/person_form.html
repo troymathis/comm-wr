@@ -1,8 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-
+{% if object %}
+<h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+{% else %}
 <h1>Add your Info!</h1>
+{% endif %}
 <p>Before you head into the community, place your info so new connections know where to find you!</p>
-<form action="" methos="post">
+<form action="" method="post">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
@@ -10,5 +13,4 @@
     <br />
     <input type="submit" value="Dive In!" class="btn" />
 </form>
-
 {% endblock %}

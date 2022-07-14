@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ person.user }}</h1>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-image">
+        {% for photo in person.photo_set.all %}
+        <img src="{{photo.url}}" width="210" />
+        {% empty %}
+        <img
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+          width="100"
+        />
+        {% endfor %} {% if user.is_authenticated and user == person.user %}
+        <span class="card-title">{{person.name}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col s6">
+    <div class="card-content">
+      {{ person.bio }} <br />
+      <hr />
+      <span style="color: #7289da; font-size: xx-large; font-weight: bold"
+        >Discord:</span
+      >
+      {{ person.discord }} <br />
+      <span style="color: #00acee; font-size: xx-large; font-weight: bold"
+        >Twitter:</span
+      >
+      {{ person.twitter }} <br />
+      <span style="color: #cd486b; font-size: xx-large; font-weight: bold"
+        >Instagram:</span
+      >
+      {{ person.instagram }} <br />
+      Interests: {{ person.interests }}
+    </div>
+  </div>
+  <div class="card-action">
+    <a href="{% url 'person_update' person.id %}">Edit</a>
+  </div>
+</div>
+{% endif %} {% endblock %}

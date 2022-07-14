@@ -34,6 +34,9 @@
           <ul class="right">
             <li><a href="{% url 'about' %}">About</a></li>
             {% if user.is_authenticated %}
+            <li><a href="{% url 'person_create' %}">Edit Community Profile!</a></li>
+            <li><a href="{% url 'index' %}">The COMM(W/R)unity</a></li>
+            <li><a href="{% url 'interests_index' %}">Community Interests</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Log In</a></li>

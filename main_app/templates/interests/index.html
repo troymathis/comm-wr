@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Community Interests!</h1>
+
+{% for interest in object_list %}
+<div class="card">
+    <span class="card-title">{{ interest.name }}</span>
+</div>
+
+{% endfor %} {% endblock%}
