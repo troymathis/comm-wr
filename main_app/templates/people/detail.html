@@ -7,15 +7,14 @@
     <div class="card">
       <div class="card-image">
         {% for photo in person.photo_set.all %}
-        {% if photo.id ==  person.photo_set.all|length %}
-        <img src="{{photo.url}}" height="600"/>
-        {% endif %}
-        {% empty %}
+        <img src="{{photo.url}}" height="600" />{% empty %}
         <img
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
           width="100"
         />
-        {% endfor %} {% if user.is_authenticated and user == person.user %}
+        {% endfor %} {% for interest in user.person.interests.all %}
+        {% for int in person.interests.all %}
+        {% if interest.name == int.name %}
         <span class="card-title">{{person.name}}</span>
       </div>
     </div>
@@ -26,21 +25,17 @@
         {{ person.bio }} <br />
         <hr />
         <span style="color: #7289da; font-size: xx-large; font-weight: bold"
-          >Discord:
-        {{ person.discord }} </span
+          >Discord: {{ person.discord }} </span
         ><br />
         <span style="color: #00acee; font-size: xx-large; font-weight: bold"
-          >Twitter:
-        {{ person.twitter }} </span
+          >Twitter: {{ person.twitter }} </span
         ><br />
         <span style="color: #cd486b; font-size: xx-large; font-weight: bold"
-          >Instagram:
-        {{ person.instagram }} </span
+          >Instagram: {{ person.instagram }} </span
         ><br /><br />
+
         <span
-          >{{person.user}} is interested in
-          {% if person.interests.count %}
-          {% for interest in person.interests.all %}
+          >{{person.user}} is interested in {% if person.interests.count %} {% for interest in person.interests.all %}
           <a href="/interests/{{interest.id}}/">{{ interest.name }},</a>
           {% endfor %} {% else %}
           <p>Communal WebRoom!</p>
@@ -52,6 +47,47 @@
         <a href="{% url 'person_delete' person.id %}">Delete</a>
       </div>
     </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        {% if interests.count %} {% for interest in interests.all %}
+        {% if interest in person.interests.all %}
+        <div class="card">
+            <div class="card-content">
+              <span class="card-title"> {{ interest.name }} </span>
+            </div>
+            <div class="card-action">
+              <form
+                action="{% url 'assoc_interest_delete' person.id interest.id %}"
+                method="post"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn red">Remove</button>
+              </form>
+            </div>
+          </div>
+        {% endif %}
+        {% if interest not in person.interests.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title"> {{ interest.name }} </span>
+          </div>
+          <div class="card-action">
+            <form
+              action="{% url 'assoc_interest' person.id interest.id %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+        {% endif %}{% endfor %} {% else %} {% endif %}
+      </div>
+    </div>
   </div>
 </div>
-{% endif %} {% endblock %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endblock %}

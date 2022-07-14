@@ -1,5 +1,3 @@
-from ast import Del
-from distutils.log import Log
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -32,8 +30,10 @@ def person_index(request):
 @login_required(login_url='/accounts/login/')
 def person_detail(request, person_id):
     person = Person.objects.get(id=person_id)
+    interests = Interest.objects.all()
     return render(request, 'people/detail.html', { 
-        'person': person
+        'person': person,
+        'interests': interests
     })
 
 def signup(request):
@@ -56,7 +56,7 @@ def signup(request):
 
 class PersonCreate(LoginRequiredMixin, CreateView):
     model = Person
-    fields = ['name', 'bio', 'instagram', 'twitter', 'discord', 'interests']
+    fields = ['name', 'bio', 'instagram', 'twitter', 'discord']
     success_url = '/people/'
 
     def form_valid(self, form):
@@ -83,6 +83,16 @@ class InterestDelete(LoginRequiredMixin, DeleteView):
 class InterestList(LoginRequiredMixin, ListView):
     model = Interest
     template_name = 'interests/index.html'
+
+@login_required
+def assoc_interest(request, person_id, interest_id):
+    Person.objects.get(id=person_id).interests.add(interest_id)
+    return redirect('detail', person_id=person_id)
+
+@login_required
+def assoc_interest_delete(request, person_id, interest_id):
+    Person.objects.get(id=person_id).interests.remove(interest_id)
+    return redirect('detail', person_id=person_id)
 
 @login_required(login_url='/accounts/login/')
 def interest_detail(request, interest_id):

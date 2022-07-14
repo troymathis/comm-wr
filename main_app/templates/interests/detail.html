@@ -8,9 +8,9 @@
     <a href="{% url 'detail' person.id %}">
       <div class="card">
         <div class="card-image">
-          {% for photo in person.photo_set.all %} {% if photo.id == person.photo_set.all|length %}
+          {% for photo in person.photo_set.all %}
           <img src="{{photo.url}}" height="200" />
-          {% endif %} {% empty %}
+           {% empty %}
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
             width="100"
