@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{interest.name}}Community</h1>
+
+{% for person in people %} {% for int in person.interests.all %} {% if int.name == interest.name %}
+<div class="row">
+  <div class="col s2">
+    <a href="{% url 'detail' person.id %}">
+      <div class="card">
+        <div class="card-image">
+          {% for photo in person.photo_set.all %} {% if photo.id == person.photo_set.all|length %}
+          <img src="{{photo.url}}" height="200" />
+          {% endif %} {% empty %}
+          <img
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+            width="100"
+          />
+          {% endfor %}
+          <div class="card-title">{{person.user}}</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endif %} {% endfor %} {% endfor %} {% endblock %}

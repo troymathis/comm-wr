@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 import uuid
 import boto3
-from .models import Person, profpic, Interest
+from .models import Person, Photo, Interest
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'cwr-photobucket'
@@ -27,7 +27,7 @@ def about(request):
 @login_required(login_url='/accounts/login/')
 def person_index(request):
     people = Person.objects.all()
-    return render(request, 'people/index.html', { 'people': people , 'profpic': profpic})
+    return render(request, 'people/index.html', { 'people': people })
 
 @login_required(login_url='/accounts/login/')
 def person_detail(request, person_id):
@@ -73,12 +73,25 @@ class PersonDelete(LoginRequiredMixin, DeleteView):
 
 class InterestCreate(LoginRequiredMixin, CreateView):
     model = Interest
-    success_url = '/interests'
+    fields = ['name']
+    success_url='/interests/'
+
+class InterestDelete(LoginRequiredMixin, DeleteView):
+    model = Interest
+    success_url = '/interests/'
 
 class InterestList(LoginRequiredMixin, ListView):
     model = Interest
     template_name = 'interests/index.html'
 
+@login_required(login_url='/accounts/login/')
+def interest_detail(request, interest_id):
+    people = Person.objects.all()
+    interest = Interest.objects.get(id = interest_id)
+    return render(request, 'interests/detail.html', { 
+        'people': people,
+        'interest': interest
+    })
 
 @login_required
 def add_photo(request, person_id):
@@ -89,7 +102,7 @@ def add_photo(request, person_id):
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
-      photo = profpic(url=url, perdon_id=person_id)
+      photo = Photo(url=url, person_id=person_id)
       photo.save()
     except Exception as error:
       print("Error uploading photo: ", error)

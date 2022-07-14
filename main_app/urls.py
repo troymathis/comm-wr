@@ -9,6 +9,9 @@ urlpatterns = [
   path('person/<int:person_id>/', views.person_detail, name='detail'),
   path('person/create/', views.PersonCreate.as_view(), name='person_create'),
   path('person/<int:pk>/update/', views.PersonUpdate.as_view(), name='person_update'),
+  path('person/<int:pk>/delete/', views.PersonDelete.as_view(), name='person_delete'),
   path('interests/', views.InterestList.as_view(), name='interests_index'),
+  path('interests/create/', views.InterestCreate.as_view(), name='interests_create'),
+  path('interests/<int:interest_id>/', views.interest_detail, name="interest_detail"),
   path('person/<int:person_id>/add_photo/', views.add_photo, name='add_photo'),
 ]

@@ -3,8 +3,14 @@
 <h1>Community Interests!</h1>
 
 {% for interest in object_list %}
-<div class="card">
-    <span class="card-title">{{ interest.name }}</span>
+<div class="row">
+  <div class="col s2">
+    <div class="card">
+      <a class="card-title" href="{% url 'interest_detail' interest.id %}"
+        >{{ interest.name }}</a
+      >
+    </div>
+  </div>
 </div>
 
 {% endfor %} {% endblock%}

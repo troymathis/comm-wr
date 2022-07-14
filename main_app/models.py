@@ -37,7 +37,7 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
-class profpic(models.Model):
+class Photo(models.Model):
     url = models.CharField(max_length=200)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
