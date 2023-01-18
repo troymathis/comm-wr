@@ -6,7 +6,7 @@
 - Django
 - PostgreSQL
 - Heroku
-- 
+- CSS
 ---
 ## Sketch
 <img width="1398" alt="screen_shot_2022-07-11_at_12 15 08_am" src="https://user-images.githubusercontent.com/104251298/178989989-0009995c-3dc1-48eb-ac59-f34fc223a124.png">

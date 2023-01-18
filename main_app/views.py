@@ -16,7 +16,8 @@ BUCKET = 'cwr-photobucket'
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-  return render(request, 'home.html')
+    interests = Interest.objects.all()
+    return render(request, 'home.html', { 'interests':interests })
 
 @login_required(login_url='/accounts/login/')
 def about(request):

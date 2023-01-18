@@ -40,12 +40,15 @@
           {% endif %}
         </span>
       </div>
+      {% if person.user == user %}
       <div class="card-action">
         <a href="{% url 'person_update' person.id %}">Edit</a>
         <a href="{% url 'person_delete' person.id %}">Delete</a>
       </div>
+      {% endif %}
     </div>
     </div>
+    {% if person.user == user %}
     <div class="row">
       <div class="col s6">
         {% if interests.count %} {% for interest in interests.all %}
@@ -83,6 +86,7 @@
         {% endif %}{% endfor %} {% else %} {% endif %}
       </div>
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

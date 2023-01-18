@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'cwr.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cwr',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1i7p6bh0uqtp8',
+        'USER': 'lirqupgpkibrfn',
+        'PASSWORD': 'e9619ffa4436dd36434ad033714cf93b548481a7ff371edef5fd7006448c155e',
+        'HOST': 'ec2-23-20-224-166.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
